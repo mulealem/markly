@@ -6,25 +6,25 @@ const requireAuth = (to, from, next) => {
   const userStore = useUserStore();
   // console.log("userStore.isLoggedIn: ", userStore.isLoggedIn);
   // console.log("userStore.isLoggedIn: ", userStore.currentUser);
-  // userStore
-  //   .getCurrentUser()
-  //   .then((response) => {
-  //     if (response) {
-  //       console.log("response: ", response);
-  //       if (condition) {
-  //       }
-  //       next();
-  //     } else {
-  //       next("/");
-  //     }
-  //   })
-  //   .catch((error) => {
-  //     console.log("error: ", error);
-  //     next("/");
-  //   });
+  userStore
+    .getCurrentUser()
+    .then((response) => {
+      if (response) {
+        console.log("response: ", response);
+        // if (condition) {
+        // }
+        next();
+      } else {
+        next("/");
+      }
+    })
+    .catch((error) => {
+      console.log("error: ", error);
+      next("/");
+    });
 
   // if (userStore.isLoggedIn) {
-  next();
+  // next();
   // } else {
   //   next("/");
   // }
