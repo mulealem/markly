@@ -1,34 +1,17 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import { useUserStore } from "../stores/userStore";
+// import { useUserStore } from "../stores/userStore";
+import { supabase } from "../webClient/supabase";
 
-const requireAuth = (to, from, next) => {
-  const userStore = useUserStore();
-  // console.log("userStore.isLoggedIn: ", userStore.isLoggedIn);
-  // console.log("userStore.isLoggedIn: ", userStore.currentUser);
-  userStore
-    .getCurrentUser()
-    .then((response) => {
-      if (response) {
-        console.log("response: ", response);
-        // if (condition) {
-        // }
-        next();
-      } else {
-        next("/");
-      }
-    })
-    .catch((error) => {
-      console.log("error: ", error);
-      next("/");
-    });
+router.beforeEach((to, from, next) => {
+  // get current user info
+  const currentUser = supabase.auth.user();
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
 
-  // if (userStore.isLoggedIn) {
-  // next();
-  // } else {
-  //   next("/");
-  // }
-};
+  if (requiresAuth && !currentUser) next("sign-in");
+  else if (!requiresAuth && currentUser) next("/");
+  else next();
+});
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -42,13 +25,13 @@ const router = createRouter({
       path: "/projects",
       name: "projects",
       component: () => import("../views/ProjectsView.vue"),
-      beforeEnter: requireAuth,
+      beforeEnter: requiresAuth,
     },
     {
       path: "/project/:projectId",
       name: "project",
       component: () => import("../views/ProjectView.vue"),
-      beforeEnter: requireAuth,
+      beforeEnter: requiresAuth,
     },
     {
       path: "/interactive-images/:projectId",
