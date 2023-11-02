@@ -190,7 +190,7 @@
             <div class="md:5/12 lg:w-1/2 h-[500px]">
               <iframe
                 class="w-full h-full"
-                src="https://markly.netlify.app/interactive-images/648bf4ea7c1b380359a3"
+                src="https://markly-demo.netlify.app/interactive-images/648bf4ea7c1b380359a3"
                 frameborder="0"
                 allow="autoplay; fullscreen; picture-in-picture"
                 allowfullscreen
@@ -301,7 +301,7 @@
             <div class="md:5/12 lg:w-1/2 h-[500px]">
               <iframe
                 class="w-full h-full"
-                src="https://markly.netlify.app/interactive-images/648bf4ee0860eb238a03"
+                src="https://markly-demo.netlify.app/interactive-images/648bf4ee0860eb238a03"
                 frameborder="0"
                 allow="autoplay; fullscreen; picture-in-picture"
                 allowfullscreen
@@ -470,7 +470,7 @@
               </p>
               <div class="flex flex-wrap justify-center gap-6">
                 <a
-                  href="https://markly.authui.site/"
+                  href="https://markly-demo.authui.site/"
                   class="relative flex h-12 w-full items-center justify-center px-8 before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max"
                 >
                   <span
