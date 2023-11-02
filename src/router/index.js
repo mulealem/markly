@@ -8,8 +8,8 @@ router.beforeEach((to, from, next) => {
   const currentUser = supabase.auth.user();
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
 
-  if (requiresAuth && !currentUser) next("sign-in");
-  else if (!requiresAuth && currentUser) next("/");
+  if (requiresAuth && !currentUser) next("/");
+  else if (!requiresAuth && currentUser) next();
   else next();
 });
 
