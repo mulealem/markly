@@ -10,8 +10,10 @@ export default {
   mounted() {
     supabase.auth.onAuthStateChange((event, session) => {
       console.log(event, session);
-      if (event === "SIGNED_IN" && this.$route.name === "home") {
-        console.log("SIGNED_IN::::::::::::::::::::::::::::::");
+      if (this.$route.name === "interactive-image") {
+        // console.log("interactive-image::::::::::::::::::::::::::::::");
+      } else if (event === "SIGNED_IN" && this.$route.name === "home") {
+        // console.log("SIGNED_IN::::::::::::::::::::::::::::::");
         this.$router.push({ name: "projects" });
       } else if (event === "SIGNED_OUT") {
         this.$router.push({ name: "home" });

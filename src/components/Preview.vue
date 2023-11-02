@@ -1,6 +1,8 @@
 <template>
-  <div class="h-screen w-full absolute top-0 left-0 bg-neutral-50">
-    <div class="flex justify-start items-center p-2">
+  <div
+    class="h-screen w-full absolute top-0 left-0 bg-neutral-50 flex flex-col"
+  >
+    <div class="flex justify-start items-center p-2 flex-none">
       <div
         class="p-2 bg-neutral-800 text-white rounded-full cursor-pointer"
         @click="close"
@@ -22,8 +24,32 @@
       </div>
       <div class="text-sm px-2">{{ project.name }} Preview</div>
     </div>
-    <div class="flex justify-center items-center">
+    <div class="w-full h-full flex justify-center items-center">
       <interactive-image :projectId="projectId" />
+    </div>
+    <div class="w-full h-60 px-10 text-sm flex flex-col">
+      <div class="w-full flex flex-row items-center gap-5">
+        <div class="w-full p-2 rounded-md">
+          <div class="w-16">Share</div>
+          <textarea
+            class="w-full ring-0 border-0 focus:ring-0 focus:border-0 focus:outline-none bg-transparent"
+            readonly
+            :value="iframeUrl"
+            @click="$event.target.select()"
+          ></textarea>
+        </div>
+      </div>
+      <div class="flex flex-row items-center gap-5">
+        <div class="w-full p-2 rounded-md">
+          <div>Embed</div>
+          <textarea
+            class="w-full ring-0 border-0 focus:ring-0 focus:border-0 focus:outline-none bg-transparent"
+            readonly
+            :value="iframeCode"
+            @click="$event.target.select()"
+          ></textarea>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -105,6 +131,12 @@ export default {
           position: this.getPositionalClass(element.left, element.top),
         };
       });
+    },
+    iframeUrl() {
+      return `${window.location.origin}/interactive-images/${this.projectId}`;
+    },
+    iframeCode() {
+      return `<iframe src="${this.iframeUrl}" width="100%" height="100%" frameborder="0"></iframe>`;
     },
   },
   methods: {
